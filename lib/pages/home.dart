@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
           color: Colors.black,
         ),
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Text(
               "News",
@@ -39,42 +40,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: ListView(
-        children: [
-          Column(children: [
-            Container(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  MaterialButton(
-                      onPressed: () {},
-                      child: const Text(
-                        "Popular",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      )),
-                  MaterialButton(
-                      onPressed: () {},
-                      child: const Text(
-                        "Trending",
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w500),
-                      )),
-                  MaterialButton(
-                      onPressed: () {},
-                      child: const Text(
-                        "Recent",
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w500),
-                      )),
-                ],
-              ),
-            )
-          ]),
-          imageCarousel
-        ],
-      ),
+      body: 
     );
   }
 }

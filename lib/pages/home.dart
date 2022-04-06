@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_nullsafety/carousel_nullsafety.dart';
+import 'package:newspanda/helper/data.dart';
+import 'package:newspanda/models/category_models.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -9,14 +10,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<CategoryModel> categories = <CategoryModel>[];
+  @override
+  void initState() {
+    super.initState();
+    categories = getMockedCategories();
+  }
+
   @override
   Widget build(BuildContext context) {
-    Widget imageCarousel = const SizedBox(
-        height: 300,
-        child: Carousel(
-          images: [AssetImage('images/c1.jpg'), AssetImage('images/c1.jpg')],
-        ));
-
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -27,7 +29,6 @@ class _HomePageState extends State<HomePage> {
           color: Colors.black,
         ),
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Text(
               "News",
@@ -40,7 +41,50 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: 
+      // ignore: avoid_unnecessary_containers
+      body: Container(
+        child: Column(
+          children: [
+            // ignore: avoid_unnecessary_containers
+            SizedBox(
+              height: 300,
+              child: ListView.builder(
+                itemCount: categories.length,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return CategoryTile(
+                    imageUrl: categories[index].imageUrl,
+                    categoryName: categories[index].categoryName,
+                  );
+                },
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CategoryTile extends StatelessWidget {
+  final String imageUrl, categoryName;
+  // ignore: use_key_in_widget_constructors
+  const CategoryTile({required this.imageUrl, required this.categoryName});
+
+  @override
+  Widget build(BuildContext context) {
+    // ignore: avoid_unnecessary_containers
+    return Container(
+      child: Stack(
+        children: [
+          Image.network(
+            imageUrl,
+            width: 120,
+            height: 60,
+          ),
+        ],
+      ),
     );
   }
 }
